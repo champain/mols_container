@@ -212,7 +212,10 @@ solve(order) do |square|
   orthogonals_for(square) do |transversal|
     orthogonal = reconstitute(transversal)
     pretty_print square, orthogonal
-    slack_send_square square, orthogonal, slack_webhook_url
+    ENV["BUILD_TESTING"] ||= "notbuilding"
+    if ENV["BUILD_TESTING"] == "notbuilding"
+      slack_send_square square, orthogonal, slack_webhook_url
+    end
   end
   if total == finish
     notify_slack(
