@@ -1,5 +1,5 @@
 sudo: required
-service:
+services:
   - docker
 language: bash
 env:
@@ -10,6 +10,7 @@ script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   - docker build -t champain/latin_squares .
   - docker run -e "BUILD_TESTING=BUILD" champain/latin_squares 3 https://hooks.slack.com/services/nottheapikey
+after_success:
   - > 
       if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
           docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
