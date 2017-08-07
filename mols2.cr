@@ -201,7 +201,7 @@ def solve(n, &block : LatinSquare -> _)
 end
 
 order = ARGV[0].to_i
-finish = 100
+finish = 150
 slack_webhook_url = ARGV[1].to_s
 
 total = 0
@@ -222,7 +222,7 @@ solve(order) do |square|
       slack_webhook_url,
       "#latin_squares",
       "squaresbot",
-      "I tried 100 times, and I coulldn't find one latin square with an order of #{order} for you :(",
+      "I tried #{finish} times, and I coulldn't find one latin square with an order of #{order} for you :(",
       ":black_square_button:",
     )
     exit
